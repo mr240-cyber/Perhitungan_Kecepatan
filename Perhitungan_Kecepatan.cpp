@@ -21,13 +21,13 @@ double hitungPace(double totalWaktuMenit, double totalWaktuDetik, double totalJa
 // Fungsi untuk menghitung kecepatan (speed) dalam satuan detik
 double hitungKecepatanDetik(double totalWaktuMenit, double totalWaktuDetik, double totalJarak) {
     double totalWaktuDetikTotal = (totalWaktuMenit * 60) + totalWaktuDetik;
-    return totalJarak / totalWaktuDetikTotal; // dalam detik per kilometer
+    return totalJarak / totalWaktuDetikTotal; // dalam kilometer per detik
 }
 
 // Fungsi untuk menentukan intensitas berdasarkan kecepatan
 string tentukanIntensitas(double kecepatanDetik) {
-    double kecepatanMph = kecepatanDetik * 0.0372823; // konversi dari detik per kilometer ke mil per jam
-    double paceMenit = 3600 / (kecepatanDetik * 60); // konversi dari detik per kilometer ke menit per mil
+    double kecepatanMph = kecepatanDetik * 0.0372823; 
+    double paceMenit = 3600 / (kecepatanDetik * 60); 
 
     if (kecepatanMph < 3) {
         return "Intensitas Ringan: Pace lebih dari 20 menit per mil";
@@ -48,14 +48,14 @@ string rekomendasi(string jenisKelamin, int umur) {
         else if (umur <= 45)
             return "Pace yang baik.";
         else
-            return "Pace yang layak.";
+            return "Pace yang lumayan.";
     } else if (jenisKelamin == "wanita") {
         if (umur <= 30)
             return "Pace yang sangat bagus.";
         else if (umur <= 45)
             return "Pace yang baik.";
         else
-            return "Pace yang layak.";
+            return "Pace yang lumayan.";
     }
     return "";
 }
@@ -95,6 +95,7 @@ int main() {
                 cout << "Data lari berhasil disimpan." << endl;
                 break;
             }
+
             case 2: {
                 if (dataLariArray.empty()) {
                     cout << "Belum ada data lari yang dimasukkan." << endl;
@@ -110,14 +111,20 @@ int main() {
                         cout << "Total Waktu (menit): " << data.totalWaktuMenit << endl;
                         cout << "Total Waktu (detik): " << data.totalWaktuDetik << endl;
                         cout << "Total Jarak (kilometer): " << data.totalJarak << endl;
-                        cout << "Pace: " << pace << " menit per kilometer" << endl;
-                        cout << "Kecepatan (dalam detik per kilometer): " << kecepatanDetik << " detik per kilometer" << endl;
-                        cout << "Intensitas: " << tentukanIntensitas(kecepatanDetik) << endl;
 
-                        int umur;
-                        cout << "Masukkan umur Anda: ";
-                        cin >> umur;
-                        cout << "Rekomendasi: " << rekomendasi(data.jenisKelamin, umur) << endl;
+                        // Periksa jika waktu terlalu lama dan kecepatan terlalu lambat
+                        if (pace > 20 || kecepatanDetik < 0.00027778) {
+                            cout << "Maaf, kami tidak bisa menghitung pace lari Anda dikarenakan waktu tempuh yang lama dan kecepatan Anda terlalu lambat." << endl;
+                        } else {
+                            cout << "Pace: " << pace << " menit per kilometer" << endl;
+                            cout << "Kecepatan (dalam detik per kilometer): " << kecepatanDetik << " detik per kilometer" << endl;
+                            cout << "Intensitas: " << tentukanIntensitas(kecepatanDetik) << endl;
+
+                            int umur;
+                            cout << "Masukkan umur Anda: ";
+                            cin >> umur;
+                            cout << "Rekomendasi: " << rekomendasi(data.jenisKelamin, umur) << endl;
+                        }
 
                         cout << endl;
                     }
@@ -125,7 +132,7 @@ int main() {
                 break;
             }
             case 3:
-                cout << "Terima kasih telah menggunakan program ini!" << endl;
+                cout << "Aplikasi keluar" << endl;
                 break;
             default:
                 cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
