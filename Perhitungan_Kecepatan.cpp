@@ -41,7 +41,27 @@ string tentukanIntensitas(double kecepatanDetik) {
 }
 
 
+// Fungsi untuk menentukan rekomendasi berdasarkan umur dan jenis kelamin
+string rekomendasi(string jenisKelamin, int umur) {
+    if (jenisKelamin == "pria") {
+        if (umur <= 30)
+            return "Pace yang sangat bagus.";
+        else if (umur <= 45)
+            return "Pace yang baik.";
+        else
+            return "Pace yang lumayan.";
+    } else if (jenisKelamin == "wanita") {
+        if (umur <= 30)
+            return "Pace yang sangat bagus.";
+        else if (umur <= 45)
+            return "Pace yang baik.";
+        else
+            return "Pace yang lumayan.";
+    }
+    return "";
 
+
+}
 
 int main() {
     vector<DataLari> dataLariList;
