@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 using namespace std;
+
 // Definisi struct untuk menyimpan data lari
 struct DataLari {
     string nama;
@@ -11,23 +12,23 @@ struct DataLari {
     double totalJarak;
 };
 
-    // Fungsi untuk menghitung pace
 // Fungsi untuk menghitung pace
 double hitungPace(double totalWaktuMenit, double totalWaktuDetik, double totalJarak) {
     double totalWaktu = totalWaktuMenit + (totalWaktuDetik / 60.0);
     return totalWaktu / totalJarak;
 }
+
 // Fungsi untuk menghitung kecepatan (speed) dalam satuan detik
 double hitungKecepatanDetik(double totalWaktuMenit, double totalWaktuDetik, double totalJarak) {
     double totalWaktuDetikTotal = (totalWaktuMenit * 60) + totalWaktuDetik;
     return totalJarak / totalWaktuDetikTotal; // dalam detik per kilometer
-    return totalJarak / totalWaktuDetikTotal; // dalam kilometer per detik
 }
 
 // Fungsi untuk menentukan intensitas berdasarkan kecepatan
 string tentukanIntensitas(double kecepatanDetik) {
-    double kecepatanMph = kecepatanDetik * 0.0372823; 
-    double paceMenit = 3600 / (kecepatanDetik * 60); 
+    double kecepatanMph = kecepatanDetik * 0.0372823; // konversi dari detik per kilometer ke mil per jam
+    double paceMenit = 3600 / (kecepatanDetik * 60); // konversi dari detik per kilometer ke menit per mil
+
     if (kecepatanMph < 3) {
         return "Intensitas Ringan: Pace lebih dari 20 menit per mil";
     } else if (kecepatanMph >= 3 && kecepatanMph < 4) {
@@ -47,25 +48,21 @@ string rekomendasi(string jenisKelamin, int umur) {
         else if (umur <= 45)
             return "Pace yang baik.";
         else
-            return "Pace yang lumayan.";
+            return "Pace yang layak.";
     } else if (jenisKelamin == "wanita") {
         if (umur <= 30)
             return "Pace yang sangat bagus.";
         else if (umur <= 45)
             return "Pace yang baik.";
         else
-            return "Pace yang lumayan.";
+            return "Pace yang layak.";
     }
     return "";
-
-
 }
-
 
 int main() {
     vector<DataLari> dataLariArray;
     const int MAX_SIMPANAN = 5;
-
 
     int pilihan;
     do {
@@ -75,11 +72,13 @@ int main() {
         cout << "3. Keluar" << endl;
         cout << "Masukkan pilihan Anda: ";
         cin >> pilihan;
+
         switch (pilihan) {
             case 1: {
                 if (dataLariArray.size() >= MAX_SIMPANAN) {
                     dataLariArray.erase(dataLariArray.begin());
                 }
+
                 DataLari data;
                 cout << "Masukkan nama Anda: ";
                 cin >> data.nama;
@@ -91,14 +90,12 @@ int main() {
                 cin >> data.totalWaktuDetik;
                 cout << "Masukkan total jarak lari (kilometer): ";
                 cin >> data.totalJarak;
+
                 dataLariArray.push_back(data);
                 cout << "Data lari berhasil disimpan." << endl;
                 break;
             }
-
             case 2: {
-
-                cout << "" << endl;
                 if (dataLariArray.empty()) {
                     cout << "Belum ada data lari yang dimasukkan." << endl;
                 } else {
@@ -128,8 +125,7 @@ int main() {
                 break;
             }
             case 3:
-                cout << "aplikasi keluar" << endl;
-                cout << "Aplikasi keluar" << endl;
+                cout << "Terima kasih telah menggunakan program ini!" << endl;
                 break;
             default:
                 cout << "Pilihan tidak valid. Silakan coba lagi." << endl;
