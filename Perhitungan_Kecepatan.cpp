@@ -24,6 +24,25 @@ double hitungKecepatanDetik(double totalWaktuMenit, double totalWaktuDetik, doub
     return totalJarak / totalWaktuDetikTotal; // dalam kilometer per detik
 }
 
+// Fungsi untuk menentukan intensitas berdasarkan kecepatan
+string tentukanIntensitas(double kecepatanDetik) {
+    double kecepatanMph = kecepatanDetik * 0.0372823; 
+    double paceMenit = 3600 / (kecepatanDetik * 60); 
+
+    if (kecepatanMph < 3) {
+        return "Intensitas Ringan: Pace lebih dari 20 menit per mil";
+    } else if (kecepatanMph >= 3 && kecepatanMph < 4) {
+        return "Intensitas Sedang: Pace antara 16 dan 20 menit per mil";
+    } else if (kecepatanMph >= 4 && kecepatanMph < 5) {
+        return "Intensitas Menengah: Pace antara 12 dan 15 menit per mil";
+    } else {
+        return "Intensitas Tinggi: Pace kurang dari 12 menit per mil";
+    }
+}
+
+
+
+
 int main() {
     vector<DataLari> dataLariList;
     int pilihan;
